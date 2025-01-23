@@ -43,3 +43,24 @@ There's about 1.5A peak to peak current through the inductor.
 
 # Alternative circuit
 Another method is to build a boost converter and then drive the piezo element with a square wave.  
+
+# Hardware test of CATPIR1.0.0
+* The supply voltage has been lowered to 2.5V to avoid the piezo element from breaking.  At 5V, the supply current is more than 1A (display on the power supply).  With 2.5V, the supply current is around 0.27A.
+
+## Changes
+* A03400 was not available, so I used an SI2308DS instead.  It's a 60V/2A NMOS-transistor.
+* PMEG10020ELRX was not available, so I used another SOD123F diode instead.
+
+## Duty cycle of the NMOS-transistor
+The duty cycle of the square wave should be between 55% and 75%.  Closer to 55% is better.
+
+## Output voltage
+<img src="./doc/CATPIR1.0.0_VCC2.5V.png" width="1000px"/>
+
+* Yellow trace : voltage at the anode of the SOD123F diode
+* Pink trace : voltage at VBAT
+* Blue trace : voltage at the gate of Q1.
+
+## Conclusion
+* Peak-peak voltage at the anode of the diode is 32.2V, which is much more than the original 9.9Vpp in the Delta-Sport design.
+* The ferrite bead causes a considerable loss.  We better replace it with a wire.  There doesn't seem to be any short current spikes.
