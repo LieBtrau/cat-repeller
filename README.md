@@ -10,7 +10,10 @@ Detect cat with PIR sensor and scare them off using ultrasound.  Settings and co
 * The red LED will signal the device is active using short blinks.
 
 ## Electronics
+### CATPIR
+PCB holding PIR-sensor and piezo buzzer.
 
+* [CATPIR 1.0.0 : PCB source](https://365.altium.com/files/FE5699FE-DB18-49EB-B4F2-E8AD16447050)
 
 ## Firmware 
 ### Piezo control
@@ -23,3 +26,5 @@ https://randomnerdtutorials.com/esp32-deep-sleep-arduino-ide-wake-up-sources/
 
 https://microcontrollerslab.com/esp32-ble-server-gatt-service-battery-level-indication/
 https://circuitdigest.com/microcontroller-projects/esp32-based-bluetooth-ibeacon
+
+

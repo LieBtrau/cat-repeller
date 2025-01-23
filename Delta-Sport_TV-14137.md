@@ -1,6 +1,6 @@
 # Specification
 ## Power Supply
-* ICR18650-1300FY, protected Li-Ion cell : 1300mAh 
+* ICR18650-1300FY, protected Li-Ion cell : 1300mAh, 100㏀ thermistor.  Unfortunately it's not a 10㏀ thermistor, which would have been a more standard value for connection to a battery charger.
 * Solar panel : 5.5V open circuit, 10mA short circuit
 * LDO : 2.5V output, which is used as VCC for MCU and PIR-sensors
 
