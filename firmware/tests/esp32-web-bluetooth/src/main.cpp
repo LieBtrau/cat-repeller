@@ -30,8 +30,10 @@ BLECharacteristic *pLedCharacteristic = NULL;
 static bool deviceConnected = false;
 static uint32_t value = 0;
 static AsyncDelay samplingInterval;
+static AsyncDelay advertizingInterval;
 
 static void setup_ble();
+static void start_advertising();
 
 const int ledPin = 2; // Use the appropriate GPIO pin for your setup
 
@@ -122,8 +124,9 @@ void setup_ble()
 	pAdvertising->addServiceUUID(SERVICE_UUID);
 	pAdvertising->setScanResponse(false);
 	pAdvertising->setMinPreferred(0x0); // set value to 0x00 to not advertise this parameter
-	BLEDevice::startAdvertising();
+	start_advertising();
 	ESP_LOGI(TAG, "Waiting a client connection to notify...");
+	BLEDevice::
 }
 
 typedef enum connection_state
@@ -139,6 +142,13 @@ void loop()
 	switch (connection_state)
 	{
 	case DISCONNECTED:
+		if (advertizingInterval.isExpired())
+		{
+			esp_sleep_enable_timer_wakeup(7e6);
+			esp_light_sleep_start();
+			//esp_deep_sleep_start();
+			start_advertising();
+		}
 		if (deviceConnected)
 		{
 			connection_state = CONNECTED;
@@ -162,11 +172,18 @@ void loop()
 		else
 		{
 			ESP_LOGI(TAG, "Device disconnected.");
-			delay(500);					 // give the bluetooth stack the chance to get things ready
-			pServer->startAdvertising(); // restart advertising
-			ESP_LOGI(TAG, "Start advertising");
+			delay(500); // give the bluetooth stack the chance to get things ready
+			start_advertising();
 			connection_state = DISCONNECTED;
 		}
 		break;
 	}
+}
+
+void start_advertising()
+{
+	BLEDevice::startAdvertising();
+	delay(100);
+	BLEDevice::stopAdvertising();
+	advertizingInterval.start(1000, AsyncDelay::MILLIS);
 }
