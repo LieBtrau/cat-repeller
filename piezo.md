@@ -49,7 +49,7 @@ Another method is to build a boost converter and then drive the piezo element wi
 
 ## Changes
 * A03400 was not available, so I used an SI2308DS instead.  It's a 60V/2A NMOS-transistor.
-* PMEG10020ELRX was not available, so I used another SOD123F diode instead.
+* PMEG10020ELRX was not available, so I used a SDM2100S1F-7 diode instead.
 
 ## Duty cycle of the NMOS-transistor
 The duty cycle of the square wave should be between 55% and 75%.  Closer to 55% is better.
